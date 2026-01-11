@@ -77,13 +77,40 @@
 
             <!-- Scan Tab Content -->
             <div class="tab-content" id="scan-tab">
-                <div class="scanner-container">
-                    <div id="qr-reader"></div>
-                    <p class="scanner-hint">Point your camera at the QR code on the jewellery</p>
+                <div class="scanner-trigger">
+                    <button id="open-scanner-btn" class="btn btn-primary btn-full">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                        </svg>
+                        Open Camera Scanner
+                    </button>
+                    <p class="scanner-hint">Tap to open your camera and scan the QR code</p>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- QR Scanner Modal -->
+    <div id="scanner-modal" class="scanner-modal hidden">
+        <div class="scanner-modal-content">
+            <div class="scanner-modal-header">
+                <h2>Scan QR Code</h2>
+                <button id="close-scanner-btn" class="scanner-close-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="scanner-modal-body">
+                <div id="qr-reader"></div>
+                <p class="scanner-modal-hint">Point your camera at the QR code on the jewellery</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Featured Products Section -->
     <section class="products-section">

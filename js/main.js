@@ -16,11 +16,15 @@ function initTabs() {
     const tabBtns = document.querySelectorAll('.tab-btn');
     const searchTab = document.getElementById('search-tab');
     const scanTab = document.getElementById('scan-tab');
+    const scannerModal = document.getElementById('scanner-modal');
+    const openScannerBtn = document.getElementById('open-scanner-btn');
+    const closeScannerBtn = document.getElementById('close-scanner-btn');
 
     let scanner = null;
 
+    // Tab switching
     tabBtns.forEach(btn => {
-        btn.addEventListener('click', async () => {
+        btn.addEventListener('click', () => {
             const tab = btn.dataset.tab;
 
             // Update active states
@@ -30,22 +34,47 @@ function initTabs() {
             if (tab === 'search') {
                 searchTab.classList.add('active');
                 scanTab.classList.remove('active');
-
-                // Stop scanner if running
-                if (scanner) {
-                    await scanner.stop();
-                }
             } else {
                 searchTab.classList.remove('active');
                 scanTab.classList.add('active');
-
-                // Start scanner
-                if (!scanner) {
-                    scanner = new QRScanner('qr-reader');
-                }
-                await scanner.start();
             }
         });
+    });
+
+    // Open scanner modal
+    openScannerBtn.addEventListener('click', async () => {
+        scannerModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Prevent background scroll
+
+        if (!scanner) {
+            scanner = new QRScanner('qr-reader');
+        }
+        await scanner.start();
+    });
+
+    // Close scanner modal
+    const closeScanner = async () => {
+        if (scanner) {
+            await scanner.stop();
+        }
+        scannerModal.classList.add('hidden');
+        document.body.style.overflow = ''; // Restore scroll
+    };
+
+    closeScannerBtn.addEventListener('click', closeScanner);
+
+    // Close on backdrop click
+    scannerModal.addEventListener('click', (e) => {
+        if (e.target === scannerModal) {
+            closeScanner();
+        }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !scannerModal.classList.contains('hidden')) {
+            closeScanner();
+        }
     });
 }
 
