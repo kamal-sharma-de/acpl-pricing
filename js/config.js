@@ -20,7 +20,8 @@ const CONFIG = {
 
     // Website base URL (update when deploying)
     // This is used in QR codes to create the product URL
-    BASE_URL: window.location.origin,
+    // For GitHub Pages: window.location.origin + '/acpl-pricing'
+    BASE_URL: window.location.origin + '/acpl-pricing',
 
     // Store information
     STORE_NAME: 'ACPL',
