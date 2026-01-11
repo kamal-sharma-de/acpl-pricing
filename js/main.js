@@ -97,8 +97,8 @@ function initSearch() {
     const performSearch = () => {
         const styleCode = input.value.trim();
         if (styleCode) {
-            const url = `${window.location.origin}/product.html?style=${encodeURIComponent(styleCode)}`;
-            console.log('Search navigating to:', url);
+            // Use CONFIG.BASE_URL to handle GitHub Pages subdirectory
+            const url = `${CONFIG.BASE_URL}/product.html?style=${encodeURIComponent(styleCode)}`;
             window.location.href = url;
         }
     };
