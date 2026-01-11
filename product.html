@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - ACPL</title>
+    <meta name="description" content="View jewellery product details at ACPL.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-text">ACPL</span>
+                <span class="logo-tagline">Fine Jewellery</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Product Detail Section -->
+    <section class="product-detail-section">
+        <div class="container">
+            <a href="index.html" class="back-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m15 18-6-6 6-6"></path>
+                </svg>
+                Back to Collection
+            </a>
+
+            <div id="product-container" class="product-detail">
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Loading product details...</p>
+                </div>
+            </div>
+
+            <!-- Product Not Found State -->
+            <div id="not-found" class="not-found hidden">
+                <div class="not-found-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="m15 9-6 6"></path>
+                        <path d="m9 9 6 6"></path>
+                    </svg>
+                </div>
+                <h2>Product Not Found</h2>
+                <p>We couldn't find a product with this style code. Please check the code and try again.</p>
+                <a href="index.html" class="btn btn-primary">Browse Collection</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <span class="logo-text">ACPL</span>
+                <p>Fine Jewellery</p>
+            </div>
+            <p class="footer-copy">&copy; 2026 ACPL. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/sheets.js"></script>
+    <script src="js/product.js"></script>
+</body>
+
+</html>
