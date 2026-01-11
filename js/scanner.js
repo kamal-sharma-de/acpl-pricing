@@ -20,19 +20,13 @@ class QRScanner {
         try {
             this.scanner = new Html5Qrcode(this.elementId);
 
-            // Get viewport dimensions for responsive qrbox
-            const viewportWidth = Math.min(window.innerWidth - 48, 350);
-            const qrboxSize = Math.floor(viewportWidth * 0.8);
-
             await this.scanner.start(
                 { facingMode: "environment" }, // Use back camera
                 {
-                    fps: 15, // Higher FPS for better detection
-                    qrbox: { width: qrboxSize, height: qrboxSize },
-                    aspectRatio: 1,
-                    disableFlip: false, // Allow scanning mirrored QR codes
+                    fps: 15,
+                    // No qrbox = scan entire camera view for better detection of large QR codes
                     experimentalFeatures: {
-                        useBarCodeDetectorIfSupported: true // Use native detector if available
+                        useBarCodeDetectorIfSupported: true
                     }
                 },
                 (decodedText) => this.onScanSuccess(decodedText),
