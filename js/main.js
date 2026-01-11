@@ -17,14 +17,28 @@ function initTabs() {
     const searchTab = document.getElementById('search-tab');
     const scanTab = document.getElementById('scan-tab');
     const scannerModal = document.getElementById('scanner-modal');
-    const openScannerBtn = document.getElementById('open-scanner-btn');
     const closeScannerBtn = document.getElementById('close-scanner-btn');
 
     let scanner = null;
 
+    // Close scanner modal function
+    const closeScanner = async () => {
+        if (scanner) {
+            await scanner.stop();
+        }
+        scannerModal.classList.add('hidden');
+        document.body.style.overflow = '';
+
+        // Switch back to search tab
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabBtns[0].classList.add('active'); // Search tab
+        searchTab.classList.add('active');
+        scanTab.classList.remove('active');
+    };
+
     // Tab switching
     tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', async () => {
             const tab = btn.dataset.tab;
 
             // Update active states
@@ -34,33 +48,28 @@ function initTabs() {
             if (tab === 'search') {
                 searchTab.classList.add('active');
                 scanTab.classList.remove('active');
+
+                // Close scanner if open
+                if (!scannerModal.classList.contains('hidden')) {
+                    await closeScanner();
+                }
             } else {
                 searchTab.classList.remove('active');
                 scanTab.classList.add('active');
+
+                // Open scanner modal directly
+                scannerModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+
+                if (!scanner) {
+                    scanner = new QRScanner('qr-reader');
+                }
+                await scanner.start();
             }
         });
     });
 
-    // Open scanner modal
-    openScannerBtn.addEventListener('click', async () => {
-        scannerModal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden'; // Prevent background scroll
-
-        if (!scanner) {
-            scanner = new QRScanner('qr-reader');
-        }
-        await scanner.start();
-    });
-
-    // Close scanner modal
-    const closeScanner = async () => {
-        if (scanner) {
-            await scanner.stop();
-        }
-        scannerModal.classList.add('hidden');
-        document.body.style.overflow = ''; // Restore scroll
-    };
-
+    // Close button
     closeScannerBtn.addEventListener('click', closeScanner);
 
     // Close on backdrop click
