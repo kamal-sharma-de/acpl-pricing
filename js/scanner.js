@@ -20,12 +20,20 @@ class QRScanner {
         try {
             this.scanner = new Html5Qrcode(this.elementId);
 
+            // Get viewport dimensions for responsive qrbox
+            const viewportWidth = Math.min(window.innerWidth - 48, 350);
+            const qrboxSize = Math.floor(viewportWidth * 0.8);
+
             await this.scanner.start(
                 { facingMode: "environment" }, // Use back camera
                 {
-                    fps: 10,
-                    qrbox: { width: 250, height: 250 },
-                    aspectRatio: 1
+                    fps: 15, // Higher FPS for better detection
+                    qrbox: { width: qrboxSize, height: qrboxSize },
+                    aspectRatio: 1,
+                    disableFlip: false, // Allow scanning mirrored QR codes
+                    experimentalFeatures: {
+                        useBarCodeDetectorIfSupported: true // Use native detector if available
+                    }
                 },
                 (decodedText) => this.onScanSuccess(decodedText),
                 (errorMessage) => this.onScanError(errorMessage)
@@ -87,7 +95,9 @@ class QRScanner {
      * Navigate to product page
      */
     navigateToProduct(styleCode) {
-        window.location.href = `product.html?style=${encodeURIComponent(styleCode)}`;
+        // Use CONFIG.BASE_URL for GitHub Pages compatibility
+        const baseUrl = typeof CONFIG !== 'undefined' ? CONFIG.BASE_URL : window.location.origin;
+        window.location.href = `${baseUrl}/product.html?style=${encodeURIComponent(styleCode)}`;
     }
 
     /**
