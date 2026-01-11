@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize components
     initTabs();
     initSearch();
-    loadProducts();
+    // loadProducts(); // Hidden for now - uncomment to show "Our Collection"
 });
 
 /**

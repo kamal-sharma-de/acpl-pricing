@@ -25,7 +25,7 @@ const CONFIG = {
 
     // Store information
     STORE_NAME: 'ACPL',
-    STORE_TAGLINE: 'Fine Jewellery',
+    STORE_TAGLINE: 'Sterling 925 Silver Jewellery',
 
     // Column mapping (these should match your Google Sheet headers)
     // The keys are internal names, values are the column headers in your sheet
