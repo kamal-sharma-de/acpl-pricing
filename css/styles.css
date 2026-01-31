@@ -919,14 +919,18 @@ img {
 
 .qr-code-container {
     background: white;
-    padding: 16px;
+    padding: 20px;
+    /* Increased quiet zone for better scanning */
     border-radius: 8px;
     margin-bottom: 16px;
 }
 
+.qr-code-container img,
 .qr-code-container canvas {
     display: block;
     margin: 0 auto;
+    max-width: 100%;
+    height: auto;
 }
 
 .qr-style-code {

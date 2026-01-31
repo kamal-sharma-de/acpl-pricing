@@ -116,19 +116,20 @@ function generateQRCode(styleCode) {
     const container = document.getElementById(`qr-${styleCode}`);
     if (!container) return;
 
-    const url = `${CONFIG.BASE_URL}/product.html?style=${encodeURIComponent(styleCode)}`;
+    // Use shortened URL format for simpler QR pattern (fewer characters = easier to scan at small sizes)
+    const url = `${CONFIG.BASE_URL}/p/${encodeURIComponent(styleCode)}`;
 
     // Clear any existing content
     container.innerHTML = '';
 
-    // Use qrcodejs library
+    // Use qrcodejs library with optimized settings for small jewelry prints
     new QRCode(container, {
         text: url,
-        width: 128,
-        height: 128,
+        width: 256,           // Higher resolution for sharper printing
+        height: 256,
         colorDark: '#000000',
         colorLight: '#ffffff',
-        correctLevel: QRCode.CorrectLevel.M
+        correctLevel: QRCode.CorrectLevel.H  // 30% error correction - best for scratches/wear
     });
 }
 
