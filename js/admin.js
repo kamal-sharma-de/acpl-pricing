@@ -116,8 +116,8 @@ function generateQRCode(styleCode) {
     const container = document.getElementById(`qr-${styleCode}`);
     if (!container) return;
 
-    // Use shortened URL format for simpler QR pattern (fewer characters = easier to scan at small sizes)
-    const url = `${CONFIG.BASE_URL}/p/${encodeURIComponent(styleCode)}`;
+    // Product page URL - using original format for compatibility
+    const url = `${CONFIG.BASE_URL}/product.html?style=${encodeURIComponent(styleCode)}`;
 
     // Clear any existing content
     container.innerHTML = '';
